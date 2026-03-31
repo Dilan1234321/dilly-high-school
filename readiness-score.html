@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readiness Score | Dilly High School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific styles */
+        .dimension-card { position: relative; padding-top: 40px; }
+        .dimension-card .accent-bar {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            border-radius: 16px 16px 0 0;
+        }
+        .dimension-card.blue .accent-bar { background: var(--blue); }
+        .dimension-card.gold .accent-bar { background: var(--gold); }
+        .dimension-card.green .accent-bar { background: var(--green); }
+        .dimension-card .dim-letter {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .dimension-card.blue .dim-letter { color: var(--blue); }
+        .dimension-card.gold .dim-letter { color: var(--gold); }
+        .dimension-card.green .dim-letter { color: var(--green); }
+        .dimension-card .dim-name {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+        .dimension-card.blue .dim-name { color: var(--blue); }
+        .dimension-card.gold .dim-name { color: var(--gold); }
+        .dimension-card.green .dim-name { color: var(--green); }
+        .dimension-card .dim-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .dimension-card .dim-assessed {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .dimension-card .dim-assessed strong { color: var(--text-secondary); }
+        .dimension-card .dim-stat {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .dimension-card.blue .dim-stat { color: var(--blue); }
+        .dimension-card.gold .dim-stat { color: var(--gold); }
+        .dimension-card.green .dim-stat { color: var(--green); }
+
+        /* Journey visualization */
+        .journey-visual {
+            display: flex;
+            align-items: flex-end;
+            gap: 24px;
+            justify-content: center;
+            padding: 48px 0;
+        }
+        .journey-year {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            max-width: 200px;
+        }
+        .journey-bar {
+            width: 100%;
+            border-radius: 12px 12px 4px 4px;
+            position: relative;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .journey-bar .score-label {
+            position: absolute;
+            top: -32px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+        .journey-year-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+        .journey-year-grade {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Who Sees What cards */
+        .audience-card .audience-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .audience-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gold);
+        }
+        .audience-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .audience-card ul li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 4px 0 4px 16px;
+            position: relative;
+        }
+        .audience-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 10px;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .journey-visual { flex-direction: row; overflow-x: auto; padding: 48px 16px; }
+            .journey-year { min-width: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+    <div class="nav-menu">
+        <div class="nav-item">
+            Platform
+            <div class="nav-dropdown">
+                <a href="readiness-score.html"><span class="dd-label">Readiness Score</span><span class="dd-desc">Smart, Grit, Build tracking</span></a>
+                <a href="ai-curriculum.html"><span class="dd-label">AI Curriculum</span><span class="dd-desc">Standards-aligned course library</span></a>
+                <a href="career-exploration.html"><span class="dd-label">Career Exploration</span><span class="dd-desc">Pathway matching &amp; labor data</span></a>
+                <a href="essay-grading.html"><span class="dd-label">Essay Grading</span><span class="dd-desc">Rubric-based admissions essays</span></a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Admissions &amp; Career
+            <div class="nav-dropdown">
+                <a href="college-admissions.html"><span class="dd-label">College Admissions Suite</span><span class="dd-desc">Matching, essays, timelines, aid</span></a>
+                <a href="career-exploration.html"><span class="dd-label">Career Pathways</span><span class="dd-desc">Industry exploration &amp; readiness</span></a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Dashboards
+            <div class="nav-dropdown">
+                <a href="dashboards.html"><span class="dd-label">Student Dashboard</span><span class="dd-desc">Personal progress &amp; goals</span></a>
+                <a href="dashboards.html"><span class="dd-label">Counselor Dashboard</span><span class="dd-desc">Caseload &amp; at-risk alerts</span></a>
+                <a href="dashboards.html"><span class="dd-label">Admin Dashboard</span><span class="dd-desc">District-wide analytics</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="nav-right">
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="demo.html" class="btn btn-primary">Schedule Demo</a>
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+    <div class="container">
+        <div class="hero-badge"><span class="pulse"></span> Readiness Score</div>
+        <h1>The score that tells you where every student <span class="gold">really stands.</span></h1>
+        <p class="hero-sub">A quantified, multi-dimensional career readiness score &mdash; Smart, Grit, Build &mdash; tracked from freshman year to graduation.</p>
+        <div class="hero-ctas">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== THREE DIMENSIONS ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-label reveal">Three Dimensions</div>
+        <h2 class="section-title reveal">One score. Three dimensions.<br>The full picture.</h2>
+        <p class="section-desc reveal" style="margin-bottom: 48px;">Every student is more than a GPA. The Readiness Score captures knowledge, character, and capability in a single, trackable number.</p>
+
+        <div class="grid-3 reveal-stagger">
+            <!-- SMART -->
+            <div class="card dimension-card blue">
+                <div class="accent-bar"></div>
+                <div class="dim-letter">S</div>
+                <div class="dim-name">Smart</div>
+                <p class="dim-desc">Knowledge, analytical thinking, and academic preparation. The cognitive foundation every career requires.</p>
+                <p class="dim-assessed"><strong>Assessed via:</strong> GPA, course rigor, AI literacy scores, reading comprehension, quantitative reasoning.</p>
+                <div class="dim-stat">94% of hiring managers prioritize critical thinking over degree prestige.</div>
+            </div>
+
+            <!-- GRIT -->
+            <div class="card dimension-card gold">
+                <div class="accent-bar"></div>
+                <div class="dim-letter">G</div>
+                <div class="dim-name">Grit</div>
+                <p class="dim-desc">Resilience, leadership, and persistence. The qualities that separate those who succeed from those who quit.</p>
+                <p class="dim-assessed"><strong>Assessed via:</strong> Extracurriculars, work experience, mock interview performance, peer &amp; teacher endorsements.</p>
+                <div class="dim-stat">Strongest single predictor of long-term career success in longitudinal studies.</div>
+            </div>
+
+            <!-- BUILD -->
+            <div class="card dimension-card green">
+                <div class="accent-bar"></div>
+                <div class="dim-letter">B</div>
+                <div class="dim-name">Build</div>
+                <p class="dim-desc">Practical skills, portfolio quality, and industry certifications. Proof that a student can create, not just consume.</p>
+                <p class="dim-assessed"><strong>Assessed via:</strong> Course completions, certifications earned, portfolio artifacts, resume quality score.</p>
+                <div class="dim-stat">92% of employers say graduates need more practical, applied skills.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== THE JOURNEY ===== -->
+<section class="section">
+    <div class="container">
+        <div class="section-label reveal">The Journey</div>
+        <h2 class="section-title reveal">From 34 to 72. <span style="color:var(--gold)">Visible growth</span> drives engagement.</h2>
+        <p class="section-desc reveal" style="margin-bottom: 24px;">A 9th grader starts with a baseline score. Every course completed, skill earned, and challenge met pushes the number up. Students see the trajectory &mdash; and so do counselors and parents.</p>
+
+        <div class="journey-visual reveal">
+            <div class="journey-year">
+                <div class="journey-bar" style="height: 85px; background: linear-gradient(to top, rgba(96,165,250,0.3), rgba(96,165,250,0.6));">
+                    <span class="score-label" style="color: var(--blue);">34</span>
+                </div>
+                <span class="journey-year-label">Freshman</span>
+                <span class="journey-year-grade">9th Grade</span>
+            </div>
+            <div class="journey-year">
+                <div class="journey-bar" style="height: 130px; background: linear-gradient(to top, rgba(167,139,250,0.3), rgba(167,139,250,0.6));">
+                    <span class="score-label" style="color: var(--purple);">48</span>
+                </div>
+                <span class="journey-year-label">Sophomore</span>
+                <span class="journey-year-grade">10th Grade</span>
+            </div>
+            <div class="journey-year">
+                <div class="journey-bar" style="height: 175px; background: linear-gradient(to top, rgba(212,168,67,0.3), rgba(212,168,67,0.6));">
+                    <span class="score-label" style="color: var(--gold);">61</span>
+                </div>
+                <span class="journey-year-label">Junior</span>
+                <span class="journey-year-grade">11th Grade</span>
+            </div>
+            <div class="journey-year">
+                <div class="journey-bar" style="height: 220px; background: linear-gradient(to top, rgba(52,211,153,0.3), rgba(52,211,153,0.6));">
+                    <span class="score-label" style="color: var(--green);">72</span>
+                </div>
+                <span class="journey-year-label">Senior</span>
+                <span class="journey-year-grade">12th Grade</span>
+            </div>
+        </div>
+
+        <div class="card reveal" style="max-width: 700px; margin: 32px auto 0; text-align: center; padding: 24px 32px;">
+            <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.7;">When students can <strong style="color: var(--text-primary);">see</strong> their progress as a number, engagement increases. Counselors report that students with visible score trajectories are <strong style="color: var(--gold);">3.2x more likely</strong> to complete recommended activities and stay on track toward career readiness goals.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WHO SEES WHAT ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-label reveal">Who Sees What</div>
+        <h2 class="section-title reveal">One score. <span style="color:var(--gold)">Four perspectives.</span></h2>
+        <p class="section-desc reveal" style="margin-bottom: 48px;">Every stakeholder gets the view they need &mdash; no more, no less.</p>
+
+        <div class="grid-4 reveal-stagger">
+            <div class="card audience-card">
+                <span class="audience-icon">&#127891;</span>
+                <h3>Students</h3>
+                <ul>
+                    <li>Own composite &amp; dimension scores</li>
+                    <li>Career matches based on profile</li>
+                    <li>Next-step recommendations</li>
+                    <li>Peer percentile (optional)</li>
+                </ul>
+            </div>
+            <div class="card audience-card">
+                <span class="audience-icon">&#128104;&#8205;&#128105;&#8205;&#128103;</span>
+                <h3>Parents</h3>
+                <ul>
+                    <li>Weekly progress updates</li>
+                    <li>Action items for support</li>
+                    <li>Score trend over time</li>
+                    <li>College readiness benchmarks</li>
+                </ul>
+            </div>
+            <div class="card audience-card">
+                <span class="audience-icon">&#128218;</span>
+                <h3>Counselors</h3>
+                <ul>
+                    <li>Full caseload score overview</li>
+                    <li>At-risk student alerts</li>
+                    <li>Dimension-level drill-downs</li>
+                    <li>Intervention tracking</li>
+                </ul>
+            </div>
+            <div class="card audience-card">
+                <span class="audience-icon">&#127970;</span>
+                <h3>Administrators</h3>
+                <ul>
+                    <li>District-wide score distributions</li>
+                    <li>Equity gap analysis</li>
+                    <li>Year-over-year trends</li>
+                    <li>Program effectiveness metrics</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== RELATED FEATURES ===== -->
+<section class="section">
+    <div class="container">
+        <div class="section-label reveal">Related Features</div>
+        <h2 class="section-title reveal" style="margin-bottom: 48px;">Works even better with</h2>
+
+        <div class="related-grid reveal-stagger">
+            <a href="college-admissions.html" class="card card-topline">
+                <span class="card-icon">&#127891;</span>
+                <h3>College Admissions Suite</h3>
+                <p>Matching, essays, timelines, financial aid &mdash; the full admissions intelligence platform.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+            <a href="ai-curriculum.html" class="card card-topline">
+                <span class="card-icon">&#128218;</span>
+                <h3>AI Curriculum</h3>
+                <p>Standards-aligned course library that builds the skills the Readiness Score measures.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+            <a href="career-exploration.html" class="card card-topline">
+                <span class="card-icon">&#128640;</span>
+                <h3>Career Exploration</h3>
+                <p>Pathway matching powered by labor-market data and the student's Readiness Score profile.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="section-title">Give every student a number<br><span style="color:var(--gold)">to work toward.</span></h2>
+        <p class="section-desc">The Readiness Score turns abstract goals into measurable progress &mdash; for students, parents, counselors, and administrators.</p>
+        <div class="hero-ctas">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+            <p>College &amp; career readiness for every student. AI-powered guidance that scales.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Platform</h4>
+            <a href="readiness-score.html">Readiness Score</a>
+            <a href="ai-curriculum.html">AI Curriculum</a>
+            <a href="career-exploration.html">Career Exploration</a>
+            <a href="essay-grading.html">Essay Grading</a>
+            <a href="college-admissions.html">College Admissions</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="faq.html">FAQ</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="demo.html">Schedule Demo</a>
+            <a href="dashboards.html">Dashboards</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="https://hellodilly.com">hellodilly.com</a>
+            <a href="mailto:partnerships@hellodilly.com">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Dilly. All rights reserved.
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

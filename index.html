@@ -3,956 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dilly High School | College & Career Readiness for Every Student</title>
+    <title>Dilly High School — College, Career & AI Readiness for Every Student</title>
+    <meta name="description" content="College admissions intelligence. AI literacy curriculum. Career readiness scoring. One platform for grades 9-12. Deployed in 4 weeks. $5/student/year.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --gold: #D4A843;
-            --gold-light: #E8C96A;
-            --gold-dark: #B8912E;
-            --bg-primary: #0A0A0F;
-            --bg-secondary: #111118;
-            --bg-card: #16161F;
-            --bg-card-hover: #1C1C28;
-            --text-primary: #FFFFFF;
-            --text-secondary: #A0A0B8;
-            --text-muted: #6B6B80;
-            --border: #2A2A3A;
-            --red: #FF4D4D;
-            --green: #34D399;
-            --blue: #60A5FA;
-            --purple: #A78BFA;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== NAVBAR ===== */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 0 48px;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s;
-        }
-        nav.scrolled { background: rgba(10, 10, 15, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
-        .nav-logo {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-        .nav-logo span { color: var(--gold); }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--text-primary); }
-
-        .btn-primary {
-            background: var(--gold);
-            color: #000;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.25s;
-            border: none;
-            cursor: pointer;
-            letter-spacing: -0.2px;
-        }
-        .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(212, 168, 67, 0.3); }
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid var(--border);
-            transition: all 0.25s;
-            cursor: pointer;
-        }
-        .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-        .btn-large { padding: 16px 36px; font-size: 16px; border-radius: 10px; }
-
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 120px 24px 80px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -200px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 100px;
-            background: rgba(212, 168, 67, 0.1);
-            border: 1px solid rgba(212, 168, 67, 0.2);
-            color: var(--gold);
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 32px;
-            animation: fadeInUp 0.6s ease;
-        }
-        .hero-badge .pulse {
-            width: 8px; height: 8px;
-            background: var(--gold);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-        .hero h1 {
-            font-size: clamp(48px, 7vw, 84px);
-            font-weight: 900;
-            line-height: 1.05;
-            letter-spacing: -3px;
-            max-width: 900px;
-            animation: fadeInUp 0.6s ease 0.1s both;
-        }
-        .hero h1 .gold { color: var(--gold); }
-        .hero-sub {
-            font-size: clamp(18px, 2.2vw, 22px);
-            color: var(--text-secondary);
-            max-width: 640px;
-            margin: 24px auto 0;
-            line-height: 1.6;
-            font-weight: 400;
-            animation: fadeInUp 0.6s ease 0.2s both;
-        }
-        .hero-ctas {
-            display: flex;
-            gap: 16px;
-            margin-top: 40px;
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== CRISIS STATS BAR ===== */
-        .crisis-bar {
-            padding: 0 24px;
-            margin-top: -20px;
-            position: relative;
-            z-index: 10;
-            animation: fadeInUp 0.6s ease 0.4s both;
-        }
-        .crisis-bar-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-        .crisis-stat {
-            padding: 32px 24px;
-            text-align: center;
-            border-right: 1px solid var(--border);
-            position: relative;
-        }
-        .crisis-stat:last-child { border-right: none; }
-        .crisis-stat .number {
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--gold);
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-        .crisis-stat .number.red { color: var(--red); }
-        .crisis-stat .label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            line-height: 1.4;
-        }
-
-        /* ===== SECTION STYLES ===== */
-        section {
-            padding: 120px 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-label {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-bottom: 16px;
-        }
-        .section-title {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-        .section-desc {
-            font-size: 18px;
-            color: var(--text-secondary);
-            max-width: 600px;
-            line-height: 1.7;
-        }
-
-        /* ===== PROBLEM SECTION ===== */
-        .problem-section {
-            background: var(--bg-secondary);
-            padding: 120px 24px;
-            max-width: 100%;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .problem-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 48px;
-        }
-        .problem-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 36px;
-            transition: all 0.3s;
-        }
-        .problem-card:hover {
-            border-color: rgba(212, 168, 67, 0.3);
-            transform: translateY(-2px);
-        }
-        .problem-card .icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 20px;
-        }
-        .problem-card .icon.red { background: rgba(255, 77, 77, 0.1); }
-        .problem-card .icon.orange { background: rgba(251, 146, 60, 0.1); }
-        .problem-card .icon.yellow { background: rgba(212, 168, 67, 0.1); }
-        .problem-card .icon.purple { background: rgba(167, 139, 250, 0.1); }
-        .problem-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.3px;
-        }
-        .problem-card p {
-            color: var(--text-secondary);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        /* ===== PLATFORM OVERVIEW ===== */
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 48px;
-        }
-        .platform-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .platform-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gold);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s;
-        }
-        .platform-card:hover::before { transform: scaleX(1); }
-        .platform-card:hover {
-            border-color: rgba(212, 168, 67, 0.2);
-            background: var(--bg-card-hover);
-        }
-        .platform-card .card-icon {
-            font-size: 28px;
-            margin-bottom: 16px;
-            display: block;
-        }
-        .platform-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.3px;
-        }
-        .platform-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .platform-card .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 12px;
-        }
-        .badge-gold { background: rgba(212, 168, 67, 0.15); color: var(--gold); }
-        .badge-green { background: rgba(52, 211, 153, 0.15); color: var(--green); }
-        .badge-blue { background: rgba(96, 165, 250, 0.15); color: var(--blue); }
-        .badge-purple { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
-
-        /* ===== READINESS SCORE SECTION ===== */
-        .score-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-        }
-        .score-visual {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            position: relative;
-        }
-        .score-ring {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 8px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            margin: 0 auto 32px;
-            position: relative;
-        }
-        .score-ring::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 8px solid transparent;
-            border-top-color: var(--gold);
-            border-right-color: var(--gold);
-            border-bottom-color: var(--gold);
-            animation: scoreRotate 2s ease-in-out forwards;
-        }
-        @keyframes scoreRotate {
-            from { clip-path: polygon(50% 0, 50% 0, 50% 50%, 50% 50%); }
-            to { clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0); }
-        }
-        .score-ring .score-number {
-            font-size: 56px;
-            font-weight: 900;
-            color: var(--gold);
-            letter-spacing: -3px;
-            line-height: 1;
-        }
-        .score-ring .score-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
-        .score-dimensions {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-        .score-dim {
-            text-align: center;
-            padding: 16px;
-            background: var(--bg-secondary);
-            border-radius: 12px;
-        }
-        .score-dim .dim-value {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -1px;
-        }
-        .score-dim .dim-name {
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
-        .dim-smart .dim-value { color: var(--blue); }
-        .dim-grit .dim-value { color: var(--gold); }
-        .dim-build .dim-value { color: var(--green); }
-
-        /* ===== AI CURRICULUM SECTION ===== */
-        .curriculum-section {
-            background: var(--bg-secondary);
-            padding: 120px 24px;
-            max-width: 100%;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .curriculum-inner { max-width: 1200px; margin: 0 auto; }
-        .curriculum-timeline {
-            margin-top: 48px;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            position: relative;
-        }
-        .curriculum-timeline::before {
-            content: '';
-            position: absolute;
-            left: 32px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--gold), var(--green));
-        }
-        .curriculum-year {
-            display: grid;
-            grid-template-columns: 64px 1fr;
-            gap: 32px;
-            padding: 32px 0;
-            align-items: start;
-        }
-        .year-marker {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--bg-card);
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 16px;
-            color: var(--gold);
-            position: relative;
-            z-index: 2;
-        }
-        .year-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-        }
-        .year-content h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 6px;
-            letter-spacing: -0.3px;
-        }
-        .year-content .year-track {
-            color: var(--gold);
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-        .year-content p {
-            color: var(--text-secondary);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-        .year-content .year-meta {
-            display: flex;
-            gap: 16px;
-            margin-top: 16px;
-        }
-        .year-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* ===== COMPARISON TABLE ===== */
-        .comparison-wrap {
-            margin-top: 48px;
-            overflow-x: auto;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 800px;
-        }
-        .comparison-table th, .comparison-table td {
-            padding: 16px 20px;
-            text-align: center;
-            font-size: 14px;
-            border-bottom: 1px solid var(--border);
-        }
-        .comparison-table th {
-            background: var(--bg-card);
-            font-weight: 700;
-            color: var(--text-secondary);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .comparison-table th:first-child { text-align: left; }
-        .comparison-table th.dilly-col {
-            color: var(--gold);
-            background: rgba(212, 168, 67, 0.08);
-        }
-        .comparison-table td { background: var(--bg-secondary); }
-        .comparison-table td:first-child {
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .comparison-table td.dilly-col {
-            background: rgba(212, 168, 67, 0.04);
-            font-weight: 600;
-            color: var(--gold);
-        }
-        .comparison-table .check { color: var(--green); font-weight: 800; }
-        .comparison-table .no { color: var(--text-muted); }
-        .comparison-table .partial { color: var(--text-secondary); }
-        .comparison-table tr:last-child td { border-bottom: none; }
-
-        /* ===== PRICING SECTION ===== */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 48px;
-        }
-        .pricing-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s;
-            position: relative;
-        }
-        .pricing-card.featured {
-            border-color: var(--gold);
-            background: rgba(212, 168, 67, 0.04);
-        }
-        .pricing-card.featured::after {
-            content: 'MOST POPULAR';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold);
-            color: #000;
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 14px;
-            border-radius: 100px;
-            letter-spacing: 0.5px;
-        }
-        .pricing-card .tier-name {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-        .pricing-card .tier-price {
-            font-size: 42px;
-            font-weight: 900;
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-        .pricing-card .tier-price span {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            letter-spacing: 0;
-        }
-        .pricing-card .tier-range {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-top: 8px;
-            margin-bottom: 20px;
-        }
-        .pricing-card ul {
-            list-style: none;
-            padding: 0;
-        }
-        .pricing-card li {
-            font-size: 14px;
-            color: var(--text-secondary);
-            padding: 6px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-        .pricing-card li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--gold);
-        }
-
-        /* ===== COST COMPARISON ===== */
-        .cost-examples {
-            margin-top: 64px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .cost-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-        }
-        .cost-card .cost-district {
-            font-size: 13px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-        .cost-card .cost-students {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        .cost-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            font-size: 14px;
-            border-top: 1px solid var(--border);
-        }
-        .cost-row .cost-label { color: var(--text-secondary); }
-        .cost-row .cost-value { font-weight: 700; }
-        .cost-row .cost-value.gold { color: var(--gold); }
-        .cost-comparison-note {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 12px;
-            font-style: italic;
-        }
-
-        /* ===== TIMELINE SECTION ===== */
-        .timeline-grid {
-            margin-top: 48px;
-            display: grid;
-            gap: 0;
-        }
-        .timeline-row {
-            display: grid;
-            grid-template-columns: 140px 1fr;
-            border-bottom: 1px solid var(--border);
-        }
-        .timeline-row:last-child { border-bottom: none; }
-        .timeline-week {
-            padding: 24px;
-            font-weight: 800;
-            color: var(--gold);
-            font-size: 14px;
-            background: var(--bg-card);
-            display: flex;
-            align-items: center;
-        }
-        .timeline-desc {
-            padding: 24px;
-            font-size: 15px;
-            color: var(--text-secondary);
-        }
-        .timeline-desc strong { color: var(--text-primary); }
-
-        /* ===== URGENCY / WHY NOW ===== */
-        .urgency-section {
-            background: var(--bg-secondary);
-            padding: 120px 24px;
-            max-width: 100%;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-        .urgency-inner { max-width: 1200px; margin: 0 auto; }
-        .urgency-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 48px;
-        }
-        .urgency-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            border-left: 3px solid var(--gold);
-        }
-        .urgency-card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .urgency-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* ===== COMPLIANCE STRIP ===== */
-        .compliance-strip {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            padding: 40px 24px;
-            border-bottom: 1px solid var(--border);
-            flex-wrap: wrap;
-        }
-        .compliance-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        .compliance-item .c-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: rgba(52, 211, 153, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--green);
-            font-size: 16px;
-        }
-
-        /* ===== CTA SECTION ===== */
-        .cta-section {
-            text-align: center;
-            padding: 120px 24px 160px;
-            position: relative;
-        }
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 800px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212, 168, 67, 0.06) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .cta-section .section-title {
-            max-width: 800px;
-            margin: 0 auto 20px;
-        }
-        .cta-section .section-desc {
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        /* ===== STAKEHOLDER SECTION ===== */
-        .stakeholder-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-top: 48px;
-        }
-        .stakeholder-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 28px;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .stakeholder-card:hover { border-color: rgba(212, 168, 67, 0.3); }
-        .stakeholder-card .s-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-        .stakeholder-card h3 {
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .stakeholder-card p {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* ===== QUOTE BLOCK ===== */
-        .quote-block {
-            max-width: 800px;
-            margin: 80px auto 0;
-            padding: 48px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--gold);
-            border-radius: 16px;
-            text-align: center;
-        }
-        .quote-block p {
-            font-size: 22px;
-            font-weight: 600;
-            font-style: italic;
-            line-height: 1.5;
-            letter-spacing: -0.3px;
-            color: var(--text-primary);
-        }
-        .quote-block .quote-gold { color: var(--gold); }
-
-        /* ===== FOOTER ===== */
-        footer {
-            padding: 48px 24px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-        footer p {
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-        footer a { color: var(--gold); text-decoration: none; }
-
-        /* ===== MOBILE HAMBURGER ===== */
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        /* ===== SCROLL ANIMATIONS ===== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .platform-grid { grid-template-columns: repeat(2, 1fr); }
-            .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-            .urgency-grid { grid-template-columns: 1fr; }
-            .stakeholder-grid { grid-template-columns: repeat(2, 1fr); }
-            .score-section { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 0 20px; }
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .crisis-bar-inner { grid-template-columns: repeat(2, 1fr); }
-            .crisis-stat:nth-child(2) { border-right: none; }
-            .problem-grid { grid-template-columns: 1fr; }
-            .platform-grid { grid-template-columns: 1fr; }
-            .pricing-grid { grid-template-columns: 1fr; }
-            .cost-examples { grid-template-columns: 1fr; }
-            .stakeholder-grid { grid-template-columns: 1fr; }
-            .hero-ctas { flex-direction: column; align-items: center; }
-            .comparison-wrap { margin-left: -12px; margin-right: -12px; border-radius: 0; }
-            section { padding: 80px 20px; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- ===== NAVIGATION ===== -->
-<nav id="navbar">
-    <a href="#" class="nav-logo">dilly<span>.</span></a>
-    <div class="nav-links">
-        <a href="#platform">Platform</a>
-        <a href="#readiness">Readiness Score</a>
-        <a href="#curriculum">AI Curriculum</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#comparison">Compare</a>
-        <a href="#cta" class="btn-primary">Schedule Demo</a>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+    <div class="nav-menu">
+        <div class="nav-item">
+            Platform
+            <div class="nav-dropdown">
+                <a href="features.html">
+                    <span class="dd-label">Features Overview</span>
+                    <span class="dd-desc">Everything Dilly does in one view</span>
+                </a>
+                <a href="readiness-score.html">
+                    <span class="dd-label">Readiness Score</span>
+                    <span class="dd-desc">Quantify every student's preparedness</span>
+                </a>
+                <a href="ai-curriculum.html">
+                    <span class="dd-label">AI Curriculum</span>
+                    <span class="dd-desc">Standards-aligned AI literacy for 9-12</span>
+                </a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Admissions &amp; Career
+            <div class="nav-dropdown">
+                <a href="college-admissions.html">
+                    <span class="dd-label">College Admissions</span>
+                    <span class="dd-desc">Data-driven college matching &amp; planning</span>
+                </a>
+                <a href="essay-grading.html">
+                    <span class="dd-label">Essay Grading</span>
+                    <span class="dd-desc">AI-assisted essay development &amp; feedback</span>
+                </a>
+                <a href="career-exploration.html">
+                    <span class="dd-label">Career Exploration</span>
+                    <span class="dd-desc">Labor market intelligence for students</span>
+                </a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Dashboards
+            <div class="nav-dropdown">
+                <a href="dashboards.html">
+                    <span class="dd-label">All Dashboards</span>
+                    <span class="dd-desc">Student, parent, counselor &amp; admin views</span>
+                </a>
+            </div>
+        </div>
+        <a href="pricing.html" class="nav-item">Pricing</a>
+        <a href="faq.html" class="nav-item">FAQ</a>
     </div>
-    <button class="mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">&#9776;</button>
+    <div class="nav-right">
+        <a href="demo.html" class="btn btn-primary">Schedule Demo</a>
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -963,619 +76,271 @@
     </div>
     <h1>Every student <span class="gold">ready</span> for what comes next.</h1>
     <p class="hero-sub">
-        College admissions intelligence. AI literacy curriculum. Career readiness scoring.
-        One platform for grades 9&ndash;12. Deployed in 4 weeks. $5/student/year.
+        College admissions intelligence. AI literacy curriculum. Career readiness scoring. One platform for grades 9&ndash;12. Deployed in 4 weeks. $5/student/year.
     </p>
     <div class="hero-ctas">
-        <a href="#cta" class="btn-primary btn-large">Schedule a District Demo &rarr;</a>
-        <a href="#platform" class="btn-secondary btn-large">See the Platform</a>
+        <a href="demo.html" class="btn btn-primary btn-lg">Schedule a District Demo</a>
+        <a href="features.html" class="btn btn-secondary btn-lg">See the Platform</a>
     </div>
 </section>
 
-<!-- ===== CRISIS STATS ===== -->
-<div class="crisis-bar">
-    <div class="crisis-bar-inner">
-        <div class="crisis-stat">
-            <div class="number red" data-target="84">0%</div>
-            <div class="label">of hiring managers say HS grads are not prepared</div>
+<!-- ===== STAT BAR ===== -->
+<div class="container reveal" style="margin-top: -40px; position: relative; z-index: 2;">
+    <div class="stat-bar">
+        <div class="stat-item">
+            <div class="stat-number red" data-count="84" data-suffix="%">0%</div>
+            <div class="stat-label">of hiring managers say new grads lack readiness skills</div>
         </div>
-        <div class="crisis-stat">
-            <div class="number red" data-target="72">0%</div>
-            <div class="label">of students don't feel ready for life after high school</div>
+        <div class="stat-item">
+            <div class="stat-number red" data-count="72" data-suffix="%">0%</div>
+            <div class="stat-label">of students say they don't feel prepared for life after high school</div>
         </div>
-        <div class="crisis-stat">
-            <div class="number" data-target="15">&lt;0%</div>
-            <div class="label">of district plans address college & career readiness</div>
+        <div class="stat-item">
+            <div class="stat-number" data-count="15" data-prefix="<" data-suffix="%">0%</div>
+            <div class="stat-label">of districts have a formal AI literacy plan in place</div>
         </div>
-        <div class="crisis-stat">
-            <div class="number">400:1</div>
-            <div class="label">student-to-counselor ratio (national average)</div>
+        <div class="stat-item">
+            <div class="stat-number">400:1</div>
+            <div class="stat-label">average student-to-counselor ratio nationwide</div>
         </div>
     </div>
 </div>
 
-<!-- ===== WHAT DISTRICTS NEED ===== -->
-<div class="problem-section">
-    <div class="problem-inner">
-        <div class="section-label reveal">The Problem</div>
-        <h2 class="section-title reveal">Your district needs all of this.<br>No single tool delivers it.</h2>
-        <p class="section-desc reveal">Until now. Dilly High School solves every one of these problems with one platform.</p>
-
-        <div class="problem-grid">
-            <div class="problem-card reveal">
-                <div class="icon red">&#x1F4CA;</div>
-                <h3>No readiness measurement exists</h3>
-                <p>No tool gives high school students a quantified, multi-dimensional career readiness score that tracks improvement over time. Districts are flying blind.</p>
+<!-- ===== THE PROBLEM ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">The Problem</div>
+            <h2 class="section-title">Your district needs all of this.<br>No single tool delivers it.</h2>
+            <p class="section-desc">
+                Students need college guidance, career clarity, AI skills, and essay support. Counselors are stretched impossibly thin. Parents are left in the dark. Sound familiar?
+            </p>
+        </div>
+        <div class="grid-2 reveal-stagger" style="margin-top: 48px;">
+            <div class="card">
+                <span class="card-icon">&#128200;</span>
+                <h3>No readiness measurement</h3>
+                <p>Districts have no standardized way to quantify whether a student is truly prepared for college, career, or the workforce. Graduation rates tell you who finished &mdash; not who's ready.</p>
             </div>
-            <div class="problem-card reveal">
-                <div class="icon orange">&#x1F916;</div>
-                <h3>AI literacy mandates with no curriculum</h3>
-                <p>Ohio mandates AI policy by July 2026. Utah requires AI coursework. Boston just launched AI fluency for all public HS students. Districts need curriculum now, not next year.</p>
+            <div class="card">
+                <span class="card-icon">&#129302;</span>
+                <h3>AI mandates with no curriculum</h3>
+                <p>States are mandating AI literacy, but most districts have zero curriculum, zero training, and zero budget. The deadline is approaching &mdash; the solution isn't.</p>
             </div>
-            <div class="problem-card reveal">
-                <div class="icon yellow">&#x1F393;</div>
-                <h3>Counselors can't scale to 400:1</h3>
-                <p>College advising, essay reviews, application tracking, financial aid guidance &mdash; counselors can't do it all individually. The students who ask the most get the most. Everyone else falls through.</p>
+            <div class="card">
+                <span class="card-icon">&#128101;</span>
+                <h3>Counselors can't scale</h3>
+                <p>At 400:1 ratios, counselors spend their time on scheduling and crisis management &mdash; not on individualized college and career advising for every student.</p>
             </div>
-            <div class="problem-card reveal">
-                <div class="icon purple">&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467;</div>
+            <div class="card">
+                <span class="card-icon">&#128065;</span>
                 <h3>Parents have zero visibility</h3>
-                <p>Grades tell parents about academic performance. They don't tell parents if their child is ready for what comes after graduation. No platform gives parents career readiness data.</p>
+                <p>Parents have no window into their child's readiness journey. They rely on report cards that measure academics &mdash; not preparedness for what comes after graduation.</p>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- ===== PLATFORM OVERVIEW ===== -->
-<section id="platform">
-    <div class="section-label reveal">The Platform</div>
-    <h2 class="section-title reveal">The operating system for college<br>& career readiness.</h2>
-    <p class="section-desc reveal">Not a point solution. Not a resume builder or career interest survey. Everything your district needs &mdash; in one system.</p>
-
-    <div class="platform-grid">
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F3AF;</span>
-            <h3>Career Readiness Score</h3>
-            <p>Smart, Grit, and Build dimensions. Tracked over time. Cohort percentiles. From freshman baseline to senior readiness.</p>
-            <span class="badge badge-gold">All Grades</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F3EB;</span>
-            <h3>College Admissions Suite</h3>
-            <p>College matching (Reach/Target/Safety), essay grading, application timelines, financial aid estimator, decision tracker.</p>
-            <span class="badge badge-blue">11th-12th</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F916;</span>
-            <h3>AI Literacy Curriculum</h3>
-            <p>4-year, grade-banded curriculum aligned with AI4K12 and CSTA standards. Ready to deploy today. No RFP needed.</p>
-            <span class="badge badge-purple">All Grades</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F4DD;</span>
-            <h3>Essay Development Studio</h3>
-            <p>Rubric-based scoring against admissions criteria. AI detection scoring. Draft comparison. Voice protection analysis. 500+ school prompts.</p>
-            <span class="badge badge-blue">11th-12th</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F50D;</span>
-            <h3>Career Exploration Engine</h3>
-            <p>22 career fields scored against each student's profile. Industry insights, job market data, and AI-impact projections.</p>
-            <span class="badge badge-gold">All Grades</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F399;&#xFE0F;</span>
-            <h3>Mock Interview Simulator</h3>
-            <p>STAR framework practice. Behavioral questions with voice-to-text scoring. Company-specific and program-specific prep.</p>
-            <span class="badge badge-blue">11th-12th</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F4DA;</span>
-            <h3>Dilly Academy Courses</h3>
-            <p>10&ndash;30 min courses: Data Literacy, Resume Writing, Financial Literacy, Professional Communication, Digital Skills.</p>
-            <span class="badge badge-green">All Grades</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467;</span>
-            <h3>Parent Dashboard</h3>
-            <p>Readiness scores, weekly progress emails, college readiness indicators, career field explorer, actionable next steps.</p>
-            <span class="badge badge-green">Parents</span>
-        </div>
-        <div class="platform-card reveal">
-            <span class="card-icon">&#x1F4CA;</span>
-            <h3>Counselor & Admin Dashboards</h3>
-            <p>At-risk alerts, caseload overview, equity gap analysis, district-wide readiness data, accreditation-ready reports, ROI metrics.</p>
-            <span class="badge badge-gold">Staff & Admin</span>
         </div>
     </div>
 </section>
 
-<!-- ===== READINESS SCORE DEEP DIVE ===== -->
-<section id="readiness">
-    <div class="score-section">
-        <div>
-            <div class="section-label reveal">Career Readiness Score</div>
-            <h2 class="section-title reveal">A real number.<br>Not a vibe.</h2>
-            <p class="section-desc reveal" style="margin-bottom: 24px;">
-                Every student gets a quantified, multi-dimensional readiness score that answers the question: <strong style="color: var(--text-primary);">"Is this student ready for what comes after graduation?"</strong>
-            </p>
-            <p class="section-desc reveal" style="font-size: 15px;">
-                A 9th grader starts at 34. By senior year they watch it climb to 72. That visible trajectory &mdash; seen by the student, their parents, and their counselor &mdash; is what drives engagement. Abstract "career readiness" becomes a concrete number everyone can work toward.
+<!-- ===== THE PLATFORM ===== -->
+<section class="section">
+    <div class="container">
+        <div class="reveal" style="text-align: center;">
+            <div class="section-label">The Platform</div>
+            <h2 class="section-title">One system. Ten surfaces. Zero guesswork.</h2>
+            <p class="section-desc" style="margin: 0 auto;">
+                Dilly gives every student a personalized readiness roadmap &mdash; and gives your district the data to prove it's working.
             </p>
         </div>
-        <div class="score-visual reveal">
-            <div class="score-ring">
-                <div class="score-number">72</div>
-                <div class="score-label">Readiness</div>
+        <div class="grid-3 reveal-stagger" style="margin-top: 56px;">
+
+            <!-- Card 1: Career Readiness Score -->
+            <div class="card card-topline">
+                <span class="card-icon">&#127919;</span>
+                <h3>Career Readiness Score</h3>
+                <p>A composite score that quantifies every student's preparedness across academics, skills, experiences, and career alignment.</p>
+                <span class="badge badge-gold">Core</span>
+                <a href="readiness-score.html" class="explore-link">Explore &rarr;</a>
             </div>
-            <div class="score-dimensions">
-                <div class="score-dim dim-smart">
-                    <div class="dim-value">78</div>
-                    <div class="dim-name">Smart</div>
-                </div>
-                <div class="score-dim dim-grit">
-                    <div class="dim-value">65</div>
-                    <div class="dim-name">Grit</div>
-                </div>
-                <div class="score-dim dim-build">
-                    <div class="dim-value">71</div>
-                    <div class="dim-name">Build</div>
-                </div>
+
+            <!-- Card 2: College Admissions Suite -->
+            <div class="card card-topline">
+                <span class="card-icon">&#127891;</span>
+                <h3>College Admissions Suite</h3>
+                <p>Smart college matching, application tracking, deadline management, and admissions probability scoring for every student.</p>
+                <span class="badge badge-blue">Admissions</span>
+                <a href="college-admissions.html" class="explore-link">Explore &rarr;</a>
             </div>
+
+            <!-- Card 3: AI Literacy Curriculum -->
+            <div class="card card-topline">
+                <span class="card-icon">&#129302;</span>
+                <h3>AI Literacy Curriculum</h3>
+                <p>Standards-aligned, grade-banded AI curriculum for grades 9&ndash;12. Ready to deploy. Meets state mandates out of the box.</p>
+                <span class="badge badge-purple">AI Education</span>
+                <a href="ai-curriculum.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
+            <!-- Card 4: Essay Development Studio -->
+            <div class="card card-topline">
+                <span class="card-icon">&#9997;&#65039;</span>
+                <h3>Essay Development Studio</h3>
+                <p>AI-assisted essay brainstorming, drafting, and rubric-based feedback. Teaches writing &mdash; doesn't write for students.</p>
+                <span class="badge badge-green">Writing</span>
+                <a href="essay-grading.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
+            <!-- Card 5: Career Exploration Engine -->
+            <div class="card card-topline">
+                <span class="card-icon">&#128640;</span>
+                <h3>Career Exploration Engine</h3>
+                <p>Real labor market data, salary projections, and career pathway mapping powered by O*NET and BLS data.</p>
+                <span class="badge badge-gold">Careers</span>
+                <a href="career-exploration.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
+            <!-- Card 6: Mock Interview Simulator -->
+            <div class="card card-topline">
+                <span class="card-icon">&#127908;</span>
+                <h3>Mock Interview Simulator</h3>
+                <p>AI-powered practice interviews tailored to each student's target careers and colleges. Real-time feedback on delivery and content.</p>
+                <span class="badge badge-blue">Practice</span>
+                <a href="features.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
+            <!-- Card 7: Dilly Academy Courses -->
+            <div class="card card-topline">
+                <span class="card-icon">&#128218;</span>
+                <h3>Dilly Academy Courses</h3>
+                <p>Self-paced micro-courses on financial literacy, professional skills, digital citizenship, and more &mdash; all mapped to readiness scoring.</p>
+                <span class="badge badge-purple">Learning</span>
+                <a href="features.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
+            <!-- Card 8: Parent Dashboard -->
+            <div class="card card-topline">
+                <span class="card-icon">&#128106;</span>
+                <h3>Parent Dashboard</h3>
+                <p>A dedicated view that gives parents real-time visibility into their child's readiness journey, milestones, and next steps.</p>
+                <span class="badge badge-green">Family</span>
+                <a href="dashboards.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
+            <!-- Card 9: Counselor & Admin Dashboards -->
+            <div class="card card-topline">
+                <span class="card-icon">&#128202;</span>
+                <h3>Counselor &amp; Admin Dashboards</h3>
+                <p>District-wide analytics, cohort tracking, intervention alerts, and compliance reporting &mdash; all in one command center.</p>
+                <span class="badge badge-gold">Analytics</span>
+                <a href="dashboards.html" class="explore-link">Explore &rarr;</a>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- ===== WHO SEES WHAT ===== -->
-<section style="padding-top: 0;">
-    <div class="section-label reveal">For Every Stakeholder</div>
-    <h2 class="section-title reveal">One platform. Four dashboards.</h2>
-    <div class="stakeholder-grid">
-        <div class="stakeholder-card reveal">
-            <div class="s-icon">&#x1F9D1;&#x200D;&#x1F393;</div>
-            <h3>Students</h3>
-            <p>See their score grow. Explore 22 career fields. Complete AI courses. Build their college list. Practice interviews.</p>
+<!-- ===== WHY DILLY ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">Why Dilly</div>
+            <h2 class="section-title" style="text-align: center;">The value case is overwhelming.</h2>
         </div>
-        <div class="stakeholder-card reveal">
-            <div class="s-icon">&#x1F468;&#x200D;&#x1F469;&#x200D;&#x1F467;</div>
-            <h3>Parents</h3>
-            <p>Weekly progress emails. Readiness score at a glance. College tracker. Career field explorer. Actionable next steps.</p>
+        <div class="quote-block reveal" style="margin-top: 48px;">
+            <p>&ldquo;Private admissions consultants charge <span class="quote-gold">$5,000&ndash;$15,000</span> per student. Dilly delivers 80% of that value to <span class="quote-gold">every student</span> in your district at <span class="quote-gold">$5&ndash;8 per year</span>.&rdquo;</p>
         </div>
-        <div class="stakeholder-card reveal">
-            <div class="s-icon">&#x1F9D1;&#x200D;&#x1F4BC;</div>
-            <h3>Counselors</h3>
-            <p>Caseload overview. At-risk alerts. Gap analysis by demographic. Intervention tracking. Time saved: 10+ hrs/month.</p>
-        </div>
-        <div class="stakeholder-card reveal">
-            <div class="s-icon">&#x1F3DB;&#xFE0F;</div>
-            <h3>Administrators</h3>
-            <p>District-wide data. School comparisons. Accreditation-ready reports. AI compliance tracking. ROI metrics for the board.</p>
+        <div class="grid-3 reveal-stagger" style="margin-top: 56px;">
+            <div class="card" style="border-left: 4px solid var(--gold);">
+                <h3>AI mandates are here</h3>
+                <p>28+ states have passed or proposed AI literacy requirements. Districts without a plan face compliance risk, parent pressure, and student disadvantage.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--gold);">
+                <h3>92M jobs transforming</h3>
+                <p>The World Economic Forum projects 92 million jobs will be displaced by 2030. Students who can't work alongside AI will be left behind.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--gold);">
+                <h3>First movers define the standard</h3>
+                <p>The districts that act now will set the benchmark for student readiness. The rest will spend years catching up &mdash; at a higher cost.</p>
+            </div>
         </div>
     </div>
 </section>
-
-<!-- ===== AI CURRICULUM ===== -->
-<div class="curriculum-section" id="curriculum">
-    <div class="curriculum-inner">
-        <div class="section-label reveal">AI Literacy Curriculum</div>
-        <h2 class="section-title reveal">State mandates are here.<br>Your curriculum is ready.</h2>
-        <p class="section-desc reveal">4-year, grade-banded AI curriculum. Aligned with AI4K12 and CSTA standards. No development time. No RFP. No curriculum committee. Deploy today.</p>
-
-        <div class="curriculum-timeline">
-            <div class="curriculum-year reveal">
-                <div class="year-marker">9th</div>
-                <div class="year-content">
-                    <div class="year-track">AI Foundations</div>
-                    <h3>What is AI? How does it learn?</h3>
-                    <p>AI in daily life. Bias & fairness. History of AI. Students build foundational understanding and can identify AI in everyday technology.</p>
-                    <div class="year-meta">
-                        <span>&#x1F4D6; 8 modules</span>
-                        <span>&#x23F1; 12 hours</span>
-                    </div>
-                </div>
-            </div>
-            <div class="curriculum-year reveal">
-                <div class="year-marker">10th</div>
-                <div class="year-content">
-                    <div class="year-track">AI & Data</div>
-                    <h3>How data drives AI</h3>
-                    <p>Training data & bias. Privacy & surveillance. Data literacy. Prompt engineering basics. Students evaluate data quality and write effective prompts.</p>
-                    <div class="year-meta">
-                        <span>&#x1F4D6; 8 modules</span>
-                        <span>&#x23F1; 14 hours</span>
-                    </div>
-                </div>
-            </div>
-            <div class="curriculum-year reveal">
-                <div class="year-marker">11th</div>
-                <div class="year-content">
-                    <div class="year-track">AI & Your Career</div>
-                    <h3>AI impact by industry</h3>
-                    <p>Skills AI can't replace. Building an AI-resilient career. AI tools for productivity. AI in the application process.</p>
-                    <div class="year-meta">
-                        <span>&#x1F4D6; 8 modules</span>
-                        <span>&#x23F1; 14 hours</span>
-                    </div>
-                </div>
-            </div>
-            <div class="curriculum-year reveal">
-                <div class="year-marker">12th</div>
-                <div class="year-content">
-                    <div class="year-track">AI in Practice</div>
-                    <h3>Advanced prompt engineering & creation</h3>
-                    <p>AI for research & writing (ethical use). AI & academic integrity. Building with AI. AI entrepreneurship. College-level AI fluency.</p>
-                    <div class="year-meta">
-                        <span>&#x1F4D6; 8 modules</span>
-                        <span>&#x23F1; 16 hours</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- ===== COMPLIANCE STRIP ===== -->
-<div class="compliance-strip">
-    <div class="compliance-item reveal">
-        <div class="c-icon">&#x2713;</div>
+<div class="compliance-strip reveal">
+    <div class="compliance-item">
+        <div class="compliance-icon">&#128274;</div>
         FERPA Compliant
     </div>
-    <div class="compliance-item reveal">
-        <div class="c-icon">&#x2713;</div>
+    <div class="compliance-item">
+        <div class="compliance-icon">&#128119;</div>
         COPPA Compliant
     </div>
-    <div class="compliance-item reveal">
-        <div class="c-icon">&#x2713;</div>
-        On-Device AI Processing
+    <div class="compliance-item">
+        <div class="compliance-icon">&#128187;</div>
+        On-Device AI
     </div>
-    <div class="compliance-item reveal">
-        <div class="c-icon">&#x2713;</div>
+    <div class="compliance-item">
+        <div class="compliance-icon">&#9855;</div>
         WCAG 2.1 AA
     </div>
-    <div class="compliance-item reveal">
-        <div class="c-icon">&#x2713;</div>
-        SOC 2 Type II (Q3 2026)
+    <div class="compliance-item">
+        <div class="compliance-icon">&#128737;</div>
+        SOC 2 Type II
     </div>
-    <div class="compliance-item reveal">
-        <div class="c-icon">&#x2713;</div>
+    <div class="compliance-item">
+        <div class="compliance-icon">&#127961;</div>
         State Privacy Laws
     </div>
 </div>
 
-<!-- ===== COMPARISON TABLE ===== -->
-<section id="comparison">
-    <div class="section-label reveal">Why Dilly</div>
-    <h2 class="section-title reveal">No single platform does<br>what Dilly does.</h2>
-    <p class="section-desc reveal">Side-by-side. Feature-by-feature. The gap is massive.</p>
-
-    <div class="comparison-wrap reveal">
-        <table class="comparison-table">
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th class="dilly-col">Dilly High School</th>
-                    <th>Naviance</th>
-                    <th>YouScience</th>
-                    <th>Xello</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Quantified readiness score</td>
-                    <td class="dilly-col check">&#x2713; Smart/Grit/Build</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="partial">Partial</td>
-                    <td class="no">&#x2717;</td>
-                </tr>
-                <tr>
-                    <td>AI literacy curriculum</td>
-                    <td class="dilly-col check">&#x2713; 4-year aligned</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                </tr>
-                <tr>
-                    <td>College essay grading</td>
-                    <td class="dilly-col check">&#x2713; Rubric + AI detection</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                </tr>
-                <tr>
-                    <td>College matching</td>
-                    <td class="dilly-col check">&#x2713; Score-based + financial</td>
-                    <td class="partial">Yes (core)</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="partial">Partial</td>
-                </tr>
-                <tr>
-                    <td>Career exploration</td>
-                    <td class="dilly-col check">&#x2713; 22 fields, scored</td>
-                    <td class="partial">Interest-based</td>
-                    <td class="partial">Aptitude-based</td>
-                    <td class="partial">Interest-based</td>
-                </tr>
-                <tr>
-                    <td>Parent dashboard</td>
-                    <td class="dilly-col check">&#x2713; Readiness + weekly</td>
-                    <td class="partial">Limited</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="partial">Limited</td>
-                </tr>
-                <tr>
-                    <td>On-device AI (privacy)</td>
-                    <td class="dilly-col check">&#x2713; Essays stay on-device</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                </tr>
-                <tr>
-                    <td>Mock interviews</td>
-                    <td class="dilly-col check">&#x2713; STAR-scored</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                    <td class="no">&#x2717;</td>
-                </tr>
-                <tr>
-                    <td>Price per student</td>
-                    <td class="dilly-col" style="color: var(--green);">$5&ndash;8/yr</td>
-                    <td>$10&ndash;20/yr</td>
-                    <td>$5&ndash;8/yr</td>
-                    <td>$5&ndash;10/yr</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="quote-block reveal">
-        <p>Private admissions consultants charge <span class="quote-gold">$5,000&ndash;$15,000 per student</span>. Dilly delivers 80% of that value to <span class="quote-gold">every student in your district</span> at <span class="quote-gold">$5&ndash;8 per year</span>.</p>
-    </div>
-</section>
-
-<!-- ===== PRICING ===== -->
-<section id="pricing">
-    <div class="section-label reveal">Pricing</div>
-    <h2 class="section-title reveal">Less than a textbook.<br>More than a counselor.</h2>
-    <p class="section-desc reveal">$5&ndash;8 per student per year. Less than a single field trip. Less than 1% of what a human counselor costs. Reaches every student 24/7/365.</p>
-
-    <div class="pricing-grid">
-        <div class="pricing-card reveal">
-            <div class="tier-name">Pilot</div>
-            <div class="tier-price">$8<span>/student/yr</span></div>
-            <div class="tier-range">Up to 500 students (1&ndash;2 schools)</div>
-            <ul>
-                <li>Full platform access</li>
-                <li>Counselor dashboard</li>
-                <li>Implementation support</li>
-                <li>Quarterly review</li>
-            </ul>
+<!-- ===== CTA SECTION ===== -->
+<section class="cta-section">
+    <div class="container reveal">
+        <h2 class="section-title">Every student deserves to know <span class="gold">how ready they are</span>.</h2>
+        <p class="section-desc">See how Dilly can serve every student in your district &mdash; with a platform that deploys in weeks, not semesters.</p>
+        <div class="hero-ctas" style="justify-content: center;">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">See Pricing</a>
         </div>
-        <div class="pricing-card reveal">
-            <div class="tier-name">Standard</div>
-            <div class="tier-price">$6<span>/student/yr</span></div>
-            <div class="tier-range">501&ndash;5,000 students</div>
-            <ul>
-                <li>Full platform access</li>
-                <li>Admin dashboard</li>
-                <li>Annual training</li>
-                <li>Dedicated support</li>
-            </ul>
-        </div>
-        <div class="pricing-card featured reveal">
-            <div class="tier-name">District</div>
-            <div class="tier-price">$5<span>/student/yr</span></div>
-            <div class="tier-range">5,001&ndash;25,000 students</div>
-            <ul>
-                <li>Everything in Standard</li>
-                <li>Custom reporting + API</li>
-                <li>District admin dashboard</li>
-                <li>Bi-annual on-site training</li>
-            </ul>
-        </div>
-        <div class="pricing-card reveal">
-            <div class="tier-name">Enterprise</div>
-            <div class="tier-price">$3&ndash;4<span>/student/yr</span></div>
-            <div class="tier-range">25,001+ students</div>
-            <ul>
-                <li>Everything in District</li>
-                <li>SSO/LMS integration</li>
-                <li>Custom AI literacy tracks</li>
-                <li>Dedicated account manager</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="cost-examples">
-        <div class="cost-card reveal">
-            <div class="cost-district">Small District</div>
-            <div class="cost-students">1,500 students (9&ndash;12)</div>
-            <div class="cost-row">
-                <span class="cost-label">Annual cost</span>
-                <span class="cost-value gold">$9,000</span>
-            </div>
-            <div class="cost-row">
-                <span class="cost-label">Monthly</span>
-                <span class="cost-value">$750/mo</span>
-            </div>
-            <p class="cost-comparison-note">Less than 1 counselor FTE ($85K&ndash;$110K). Reaches all 1,500 students.</p>
-        </div>
-        <div class="cost-card reveal">
-            <div class="cost-district">Mid-Size District</div>
-            <div class="cost-students">8,000 students (9&ndash;12)</div>
-            <div class="cost-row">
-                <span class="cost-label">Annual cost</span>
-                <span class="cost-value gold">$40,000</span>
-            </div>
-            <div class="cost-row">
-                <span class="cost-label">Monthly</span>
-                <span class="cost-value">$3,333/mo</span>
-            </div>
-            <p class="cost-comparison-note">Cost of 0.4 counselor positions. Serves every student 24/7.</p>
-        </div>
-        <div class="cost-card reveal">
-            <div class="cost-district">Large District</div>
-            <div class="cost-students">30,000 students (9&ndash;12)</div>
-            <div class="cost-row">
-                <span class="cost-label">Annual cost</span>
-                <span class="cost-value gold">$100,000</span>
-            </div>
-            <div class="cost-row">
-                <span class="cost-label">Monthly</span>
-                <span class="cost-value">$8,333/mo</span>
-            </div>
-            <p class="cost-comparison-note">Less than 1 counselor salary. AI-powered support for 30K students.</p>
-        </div>
-        <div class="cost-card reveal">
-            <div class="cost-district">Major Metro</div>
-            <div class="cost-students">100,000 students (9&ndash;12)</div>
-            <div class="cost-row">
-                <span class="cost-label">Annual cost</span>
-                <span class="cost-value gold">$350,000</span>
-            </div>
-            <div class="cost-row">
-                <span class="cost-label">Monthly</span>
-                <span class="cost-value">$29,167/mo</span>
-            </div>
-            <p class="cost-comparison-note">Equivalent to 3&ndash;4 counselor positions. Reaches 100K students.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ===== IMPLEMENTATION TIMELINE ===== -->
-<section>
-    <div class="section-label reveal">Implementation</div>
-    <h2 class="section-title reveal">Contract to classroom:<br>4 weeks.</h2>
-    <p class="section-desc reveal">No construction. No hardware. No multi-year implementation cycle. Students have phones. The platform is ready.</p>
-
-    <div class="timeline-grid reveal" style="margin-top: 48px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden;">
-        <div class="timeline-row">
-            <div class="timeline-week">Week 1&ndash;2</div>
-            <div class="timeline-desc"><strong>Kickoff & configuration.</strong> SSO/LMS integration. Student roster import. Dashboard setup.</div>
-        </div>
-        <div class="timeline-row">
-            <div class="timeline-week">Week 3</div>
-            <div class="timeline-desc"><strong>Counselor & teacher training</strong> (2-hour session). Admin dashboard walkthrough. Parent communication templates.</div>
-        </div>
-        <div class="timeline-row">
-            <div class="timeline-week">Week 4</div>
-            <div class="timeline-desc"><strong>Student onboarding.</strong> Classroom launch sessions. First readiness score assessments. AI Foundations module assigned.</div>
-        </div>
-        <div class="timeline-row">
-            <div class="timeline-week">Week 5&ndash;8</div>
-            <div class="timeline-desc"><strong>Monitoring period.</strong> Weekly usage reports. Counselor dashboard adoption. Parent dashboard rollout.</div>
-        </div>
-        <div class="timeline-row">
-            <div class="timeline-week">Month 3</div>
-            <div class="timeline-desc"><strong>First quarterly review.</strong> Score distribution analysis. Gap identification. Refinement of rollout strategy.</div>
-        </div>
-        <div class="timeline-row">
-            <div class="timeline-week">Month 6</div>
-            <div class="timeline-desc"><strong>Mid-year outcomes report.</strong> Readiness score trends. AI literacy completion rates. Board presentation ready.</div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== WHY NOW ===== -->
-<div class="urgency-section">
-    <div class="urgency-inner">
-        <div class="section-label reveal">Why Now</div>
-        <h2 class="section-title reveal">The window is closing.<br>The leaders are moving.</h2>
-
-        <div class="urgency-grid">
-            <div class="urgency-card reveal">
-                <h3>AI mandates are here</h3>
-                <p>28+ states have published AI guidance. Ohio mandates policy by July 2026. Boston launched AI fluency for all public HS students on March 30, 2026. Districts that wait will scramble.</p>
-            </div>
-            <div class="urgency-card reveal">
-                <h3>92M jobs transforming by 2030</h3>
-                <p>The Class of 2030 is in 9th grade right now. If they graduate without AI literacy, they enter a workforce that has fundamentally changed since they started high school.</p>
-            </div>
-            <div class="urgency-card reveal">
-                <h3>First movers define the standard</h3>
-                <p>The district that adopts first becomes the case study. Their data becomes the benchmark. Their superintendent speaks at the conference. Early proof drives policy.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ===== FINAL CTA ===== -->
-<section class="cta-section" id="cta">
-    <div class="section-label reveal">Get Started</div>
-    <h2 class="section-title reveal">Every student in your district<br>deserves to know <span style="color: var(--gold);">how ready they are.</span></h2>
-    <p class="section-desc reveal">
-        One platform. Career readiness scoring. College admissions intelligence. AI literacy curriculum for grades 9&ndash;12. Essay grading. Career exploration. Parent dashboards. Counselor alerts. Administrator reporting. $5&ndash;8/student/year. Deployed in 4 weeks.
-    </p>
-    <div class="hero-ctas reveal" style="justify-content: center;">
-        <a href="mailto:partnerships@hellodilly.com" class="btn-primary btn-large">Schedule a District Demo &rarr;</a>
-        <a href="mailto:partnerships@hellodilly.com" class="btn-secondary btn-large">Request Pricing Proposal</a>
     </div>
 </section>
 
 <!-- ===== FOOTER ===== -->
-<footer>
-    <p><a href="https://hellodilly.com">dilly</a> &middot; College & Career Readiness for Every Student &middot; Confidential &middot; March 2026</p>
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+            <p>College, career, and AI readiness for every high school student. One platform. One price. Deployed in 4 weeks.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Platform</h4>
+            <a href="features.html">Features Overview</a>
+            <a href="readiness-score.html">Readiness Score</a>
+            <a href="ai-curriculum.html">AI Curriculum</a>
+            <a href="college-admissions.html">College Admissions</a>
+            <a href="essay-grading.html">Essay Grading</a>
+            <a href="career-exploration.html">Career Exploration</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="dashboards.html">Dashboards</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="faq.html">FAQ</a>
+            <a href="demo.html">Schedule Demo</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Dilly High School. All rights reserved.
+    </div>
 </footer>
 
-<script>
-    // Navbar scroll effect
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
-
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Animated stat counters
-    function animateCounters() {
-        const stats = document.querySelectorAll('.crisis-stat .number[data-target]');
-        stats.forEach(stat => {
-            const target = parseInt(stat.dataset.target);
-            const prefix = stat.textContent.includes('<') ? '<' : '';
-            let current = 0;
-            const increment = target / 40;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                stat.textContent = prefix + Math.round(current) + '%';
-            }, 30);
-        });
-    }
-
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounters();
-                statsObserver.disconnect();
-            }
-        });
-    }, { threshold: 0.5 });
-
-    const crisisBar = document.querySelector('.crisis-bar');
-    if (crisisBar) statsObserver.observe(crisisBar);
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Admissions Suite | Dilly High School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific styles */
+        .suite-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 32px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .suite-item:last-child { border-bottom: none; }
+        .suite-number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(212, 168, 67, 0.1);
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .suite-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+        .suite-info p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .suite-info .suite-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gold);
+            transition: gap 0.2s;
+        }
+        .suite-info .suite-link:hover { gap: 10px; }
+
+        .price-compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 700px;
+            margin: 48px auto 0;
+        }
+        .price-compare-card {
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .price-compare-card.old {
+            background: rgba(255, 77, 77, 0.05);
+            border: 1px solid rgba(255, 77, 77, 0.15);
+        }
+        .price-compare-card.new {
+            background: rgba(212, 168, 67, 0.05);
+            border: 1px solid rgba(212, 168, 67, 0.25);
+        }
+        .price-compare-card .price-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .price-compare-card.old .price-label { color: var(--red); }
+        .price-compare-card.new .price-label { color: var(--gold); }
+        .price-compare-card .price-amount {
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .price-compare-card.old .price-amount {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        .price-compare-card.new .price-amount { color: var(--gold); }
+        .price-compare-card .price-context {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .price-compare { grid-template-columns: 1fr; }
+            .suite-item { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+    <div class="nav-menu">
+        <div class="nav-item">
+            Platform
+            <div class="nav-dropdown">
+                <a href="readiness-score.html"><span class="dd-label">Readiness Score</span><span class="dd-desc">Smart, Grit, Build tracking</span></a>
+                <a href="ai-curriculum.html"><span class="dd-label">AI Curriculum</span><span class="dd-desc">Standards-aligned course library</span></a>
+                <a href="career-exploration.html"><span class="dd-label">Career Exploration</span><span class="dd-desc">Pathway matching &amp; labor data</span></a>
+                <a href="essay-grading.html"><span class="dd-label">Essay Grading</span><span class="dd-desc">Rubric-based admissions essays</span></a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Admissions &amp; Career
+            <div class="nav-dropdown">
+                <a href="college-admissions.html"><span class="dd-label">College Admissions Suite</span><span class="dd-desc">Matching, essays, timelines, aid</span></a>
+                <a href="career-exploration.html"><span class="dd-label">Career Pathways</span><span class="dd-desc">Industry exploration &amp; readiness</span></a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Dashboards
+            <div class="nav-dropdown">
+                <a href="dashboards.html"><span class="dd-label">Student Dashboard</span><span class="dd-desc">Personal progress &amp; goals</span></a>
+                <a href="dashboards.html"><span class="dd-label">Counselor Dashboard</span><span class="dd-desc">Caseload &amp; at-risk alerts</span></a>
+                <a href="dashboards.html"><span class="dd-label">Admin Dashboard</span><span class="dd-desc">District-wide analytics</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="nav-right">
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="demo.html" class="btn btn-primary">Schedule Demo</a>
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+    <div class="container">
+        <div class="hero-badge"><span class="pulse"></span> College Admissions Suite</div>
+        <h1>Every student gets a private admissions consultant. <span class="gold">For $5 a year.</span></h1>
+        <p class="hero-sub">College matching, essay grading, application timelines, financial aid &mdash; the full admissions intelligence suite.</p>
+        <div class="hero-ctas">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== THE SUITE ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-label reveal">The Suite</div>
+        <h2 class="section-title reveal">Six tools. One platform.<br><span style="color:var(--gold)">Complete admissions intelligence.</span></h2>
+        <p class="section-desc reveal" style="margin-bottom: 48px;">Everything a student needs to find, apply to, and afford the right college &mdash; without a private consultant.</p>
+
+        <div class="card reveal" style="max-width: 800px; margin: 0 auto;">
+            <div class="suite-item">
+                <div class="suite-number">1</div>
+                <div class="suite-info">
+                    <h3>College Matcher</h3>
+                    <p>GPA + test scores + extracurriculars + essay quality feed a matching algorithm that generates a personalized Reach / Target / Safety list. Each school includes acceptance probability, tuition, net price, and key deadlines. The list updates dynamically as the student's profile improves.</p>
+                </div>
+            </div>
+            <div class="suite-item">
+                <div class="suite-number">2</div>
+                <div class="suite-info">
+                    <h3>Essay Grading Engine</h3>
+                    <p>Rubric-based scoring across six dimensions &mdash; authenticity, narrative structure, reflection, writing quality, distinctiveness, and fit. Includes AI detection, draft comparison, and voice protection.</p>
+                    <a href="essay-grading.html" class="suite-link">Full essay grading details &rarr;</a>
+                </div>
+            </div>
+            <div class="suite-item">
+                <div class="suite-number">3</div>
+                <div class="suite-info">
+                    <h3>Application Timeline Manager</h3>
+                    <p>Every deadline tracked &mdash; Early Decision, Early Action, Regular Decision, financial aid, supplemental essays, interviews. Push notifications keep students on schedule. Counselors get full visibility into who is on track and who is falling behind.</p>
+                </div>
+            </div>
+            <div class="suite-item">
+                <div class="suite-number">4</div>
+                <div class="suite-info">
+                    <h3>Financial Aid Estimator</h3>
+                    <p>Expected Family Contribution (EFC) calculation, net price comparison across every school on the student's list, and a scholarship database with deadlines. Families see the real cost &mdash; not the sticker price &mdash; before they apply.</p>
+                </div>
+            </div>
+            <div class="suite-item">
+                <div class="suite-number">5</div>
+                <div class="suite-info">
+                    <h3>Recommendation Letter Manager</h3>
+                    <p>Helps students identify the best recommenders, generates personalized talking points for each teacher, and tracks request status. No more lost requests or last-minute scrambles.</p>
+                </div>
+            </div>
+            <div class="suite-item">
+                <div class="suite-number">6</div>
+                <div class="suite-info">
+                    <h3>Admissions Decision Tracker</h3>
+                    <p>Log admissions decisions as they arrive, compare financial aid packages side by side, and aggregate yield data at the school and district level. Turns individual outcomes into institutional intelligence.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DIFFERENTIATOR ===== -->
+<section class="section">
+    <div class="container">
+        <div class="section-label reveal">The Difference</div>
+        <h2 class="section-title reveal" style="text-align: center; max-width: 800px; margin: 0 auto 20px;">80% of the value.<br><span style="color:var(--gold)">0.1% of the cost.</span></h2>
+
+        <div class="quote-block reveal">
+            <p>&ldquo;Private consultants charge <span class="quote-gold">$5,000&ndash;$15,000</span>. Dilly delivers 80% of that value to <span class="quote-gold">every student</span> &mdash; for $5 a year.&rdquo;</p>
+        </div>
+
+        <div class="price-compare reveal">
+            <div class="price-compare-card old">
+                <div class="price-label">Private Consultant</div>
+                <div class="price-amount">$10K</div>
+                <div class="price-context">Per student, per cycle</div>
+            </div>
+            <div class="price-compare-card new">
+                <div class="price-label">Dilly</div>
+                <div class="price-amount">$5</div>
+                <div class="price-context">Per student, per year</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== RELATED FEATURES ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-label reveal">Related Features</div>
+        <h2 class="section-title reveal" style="margin-bottom: 48px;">Works even better with</h2>
+
+        <div class="related-grid reveal-stagger">
+            <a href="readiness-score.html" class="card card-topline">
+                <span class="card-icon">&#127919;</span>
+                <h3>Readiness Score</h3>
+                <p>Smart, Grit, Build &mdash; the multi-dimensional score that powers college matching accuracy.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+            <a href="essay-grading.html" class="card card-topline">
+                <span class="card-icon">&#9997;&#65039;</span>
+                <h3>Essay Grading</h3>
+                <p>Rubric-based scoring calibrated to what admissions committees actually look for.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+            <a href="career-exploration.html" class="card card-topline">
+                <span class="card-icon">&#128640;</span>
+                <h3>Career Exploration</h3>
+                <p>For students considering career-track pathways alongside or instead of four-year colleges.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="section-title">Give every student<br><span style="color:var(--gold)">a private admissions consultant.</span></h2>
+        <p class="section-desc">College matching, essay grading, timelines, financial aid &mdash; the complete admissions intelligence suite, at a price every district can afford.</p>
+        <div class="hero-ctas">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+            <p>College &amp; career readiness for every student. AI-powered guidance that scales.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Platform</h4>
+            <a href="readiness-score.html">Readiness Score</a>
+            <a href="ai-curriculum.html">AI Curriculum</a>
+            <a href="career-exploration.html">Career Exploration</a>
+            <a href="essay-grading.html">Essay Grading</a>
+            <a href="college-admissions.html">College Admissions</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="faq.html">FAQ</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="demo.html">Schedule Demo</a>
+            <a href="dashboards.html">Dashboards</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="https://hellodilly.com">hellodilly.com</a>
+            <a href="mailto:partnerships@hellodilly.com">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Dilly. All rights reserved.
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

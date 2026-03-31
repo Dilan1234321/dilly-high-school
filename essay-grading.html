@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Grading | Dilly High School</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Page-specific styles */
+        .scoring-dim {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .scoring-dim:last-child { border-bottom: none; }
+        .scoring-weight {
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            background: rgba(212, 168, 67, 0.1);
+            border: 1px solid rgba(212, 168, 67, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .scoring-info h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+        .scoring-info p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .beyond-card {
+            padding: 28px;
+        }
+        .beyond-card .beyond-icon {
+            font-size: 28px;
+            margin-bottom: 12px;
+            display: block;
+        }
+        .beyond-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .beyond-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+    <div class="nav-menu">
+        <div class="nav-item">
+            Platform
+            <div class="nav-dropdown">
+                <a href="readiness-score.html"><span class="dd-label">Readiness Score</span><span class="dd-desc">Smart, Grit, Build tracking</span></a>
+                <a href="ai-curriculum.html"><span class="dd-label">AI Curriculum</span><span class="dd-desc">Standards-aligned course library</span></a>
+                <a href="career-exploration.html"><span class="dd-label">Career Exploration</span><span class="dd-desc">Pathway matching &amp; labor data</span></a>
+                <a href="essay-grading.html"><span class="dd-label">Essay Grading</span><span class="dd-desc">Rubric-based admissions essays</span></a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Admissions &amp; Career
+            <div class="nav-dropdown">
+                <a href="college-admissions.html"><span class="dd-label">College Admissions Suite</span><span class="dd-desc">Matching, essays, timelines, aid</span></a>
+                <a href="career-exploration.html"><span class="dd-label">Career Pathways</span><span class="dd-desc">Industry exploration &amp; readiness</span></a>
+            </div>
+        </div>
+        <div class="nav-item">
+            Dashboards
+            <div class="nav-dropdown">
+                <a href="dashboards.html"><span class="dd-label">Student Dashboard</span><span class="dd-desc">Personal progress &amp; goals</span></a>
+                <a href="dashboards.html"><span class="dd-label">Counselor Dashboard</span><span class="dd-desc">Caseload &amp; at-risk alerts</span></a>
+                <a href="dashboards.html"><span class="dd-label">Admin Dashboard</span><span class="dd-desc">District-wide analytics</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="nav-right">
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="faq.html" class="nav-link">FAQ</a>
+        <a href="demo.html" class="btn btn-primary">Schedule Demo</a>
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+    <div class="container">
+        <div class="hero-badge"><span class="pulse"></span> Essay Grading</div>
+        <h1>Essay grading calibrated to what admissions committees <span class="gold">actually look for.</span></h1>
+        <p class="hero-sub">Rubric-based scoring, AI detection, draft comparison, voice protection &mdash; for every student, not just the ones who can afford a consultant.</p>
+        <div class="hero-ctas">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SIX SCORING DIMENSIONS ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-label reveal">Six Scoring Dimensions</div>
+        <h2 class="section-title reveal">Scored like an admissions reader.<br><span style="color:var(--gold)">Not a grammar checker.</span></h2>
+        <p class="section-desc reveal" style="margin-bottom: 48px;">Each essay is evaluated across six dimensions, weighted to match what admissions officers actually prioritize.</p>
+
+        <div class="card reveal" style="max-width: 740px; margin: 0 auto;">
+            <div class="scoring-dim">
+                <div class="scoring-weight">20%</div>
+                <div class="scoring-info">
+                    <h3>Authenticity</h3>
+                    <p>Does it sound like a real teenager? Flags overly polished language, consultant-style phrasing, and AI-generated patterns that admissions readers recognize instantly.</p>
+                </div>
+            </div>
+            <div class="scoring-dim">
+                <div class="scoring-weight">18%</div>
+                <div class="scoring-info">
+                    <h3>Narrative Structure</h3>
+                    <p>Is there a story arc? Evaluates opening hooks, rising tension, pivots, and resolution. Great essays take readers on a journey.</p>
+                </div>
+            </div>
+            <div class="scoring-dim">
+                <div class="scoring-weight">18%</div>
+                <div class="scoring-info">
+                    <h3>Reflection &amp; Growth</h3>
+                    <p>Does the student show self-awareness? Measures depth of insight, ability to connect experiences to personal development, and maturity of perspective.</p>
+                </div>
+            </div>
+            <div class="scoring-dim">
+                <div class="scoring-weight">18%</div>
+                <div class="scoring-info">
+                    <h3>Writing Quality</h3>
+                    <p>Grammar, flow, word choice. But weighted to reward voice and clarity over mechanical perfection &mdash; because admissions readers do the same.</p>
+                </div>
+            </div>
+            <div class="scoring-dim">
+                <div class="scoring-weight">14%</div>
+                <div class="scoring-info">
+                    <h3>Distinctiveness</h3>
+                    <p>Would an admissions reader remember this essay after reading 50 others? Scores originality of topic, perspective, and framing.</p>
+                </div>
+            </div>
+            <div class="scoring-dim">
+                <div class="scoring-weight">12%</div>
+                <div class="scoring-info">
+                    <h3>Fit</h3>
+                    <p>Does it answer the prompt? For supplementals, does it show genuine knowledge of the school? Generic answers that could apply anywhere score low.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== BEYOND GRAMMAR CHECKING ===== -->
+<section class="section">
+    <div class="container">
+        <div class="section-label reveal">Beyond Grammar Checking</div>
+        <h2 class="section-title reveal">The tools a $10,000 consultant uses.<br><span style="color:var(--gold)">For every student.</span></h2>
+        <p class="section-desc reveal" style="margin-bottom: 48px;">Four capabilities that go far beyond spell-check and Grammarly.</p>
+
+        <div class="grid-2 reveal-stagger">
+            <div class="card beyond-card">
+                <span class="beyond-icon">&#128270;</span>
+                <h3>AI Detection Scoring</h3>
+                <p>Shows how "AI-written" the essay reads on a 0&ndash;100 scale. Flags specific paragraphs and sentences that trigger detection algorithms, so students can revise before submitting.</p>
+            </div>
+            <div class="card beyond-card">
+                <span class="beyond-icon">&#128196;</span>
+                <h3>Draft-Over-Draft Comparison</h3>
+                <p>Side-by-side view showing exactly what improved between drafts. Highlights added depth, removed cliches, and structural changes. Teaches revision as a skill, not just a chore.</p>
+            </div>
+            <div class="card beyond-card">
+                <span class="beyond-icon">&#128101;</span>
+                <h3>Voice Protection</h3>
+                <p>Ensures the essay sounds like the student, not a consultant or AI. Analyzes vocabulary level, sentence patterns, and tone against the student's other writing samples.</p>
+            </div>
+            <div class="card beyond-card">
+                <span class="beyond-icon">&#127979;</span>
+                <h3>500+ School Prompts</h3>
+                <p>Pre-loaded supplemental prompts for 500+ colleges with school-specific criteria, word limits, and admissions priorities baked into the scoring rubric.</p>
+            </div>
+        </div>
+
+        <!-- Quote Block -->
+        <div class="quote-block reveal" style="margin-top: 64px;">
+            <p>&ldquo;At <span class="quote-gold">400:1 ratios</span>, counselors can&rsquo;t review drafts for 300+ seniors. Dilly does it for <span class="quote-gold">all of them</span>.&rdquo;</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== RELATED FEATURES ===== -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="section-label reveal">Related Features</div>
+        <h2 class="section-title reveal" style="margin-bottom: 48px;">Works even better with</h2>
+
+        <div class="related-grid reveal-stagger">
+            <a href="college-admissions.html" class="card card-topline">
+                <span class="card-icon">&#127891;</span>
+                <h3>College Admissions Suite</h3>
+                <p>Matching, essays, timelines, financial aid &mdash; the full admissions intelligence platform.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+            <a href="readiness-score.html" class="card card-topline">
+                <span class="card-icon">&#127919;</span>
+                <h3>Readiness Score</h3>
+                <p>Smart, Grit, Build &mdash; the multi-dimensional score that tracks every student's progress.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+            <a href="dashboards.html" class="card card-topline">
+                <span class="card-icon">&#128202;</span>
+                <h3>Dashboards</h3>
+                <p>Student, counselor, and admin views with real-time analytics and progress tracking.</p>
+                <span class="explore-link">Explore &rarr;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="section-title">Every student deserves<br><span style="color:var(--gold)">expert-level essay feedback.</span></h2>
+        <p class="section-desc">Rubric-based scoring calibrated to admissions standards &mdash; not grammar rules. For every student, every draft, every school.</p>
+        <div class="hero-ctas">
+            <a href="demo.html" class="btn btn-primary btn-lg">Schedule Demo</a>
+            <a href="pricing.html" class="btn btn-secondary btn-lg">View Pricing</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">dilly<span>.</span></a>
+            <p>College &amp; career readiness for every student. AI-powered guidance that scales.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Platform</h4>
+            <a href="readiness-score.html">Readiness Score</a>
+            <a href="ai-curriculum.html">AI Curriculum</a>
+            <a href="career-exploration.html">Career Exploration</a>
+            <a href="essay-grading.html">Essay Grading</a>
+            <a href="college-admissions.html">College Admissions</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="faq.html">FAQ</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="demo.html">Schedule Demo</a>
+            <a href="dashboards.html">Dashboards</a>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="https://hellodilly.com">hellodilly.com</a>
+            <a href="mailto:partnerships@hellodilly.com">Contact</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2026 Dilly. All rights reserved.
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
